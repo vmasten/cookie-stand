@@ -28,14 +28,14 @@ Stores.prototype.cookiesPerDay = function(hours) {
   var arr = [], workingTotal = 0, total = 0, currentHour = 6;
   for (var i = 0; i < hours; i++) {
     if (currentHour < 12) { //morning
-      workingTotal = location.cookiesPerHour();
+      workingTotal = this.cookiesPerHour();
       arr.push(currentHour + ' am: ' + workingTotal + ' cookies');
     }
     else if (currentHour === 12) { //noon
-      workingTotal = location.cookiesPerHour();
+      workingTotal = this.cookiesPerHour();
       arr.push(currentHour + ' pm: ' + workingTotal + ' cookies');
     } else { //evening
-      workingTotal = location.cookiesPerHour();
+      workingTotal = this.cookiesPerHour();
       arr.push((currentHour - 12) + ' pm: ' + workingTotal + ' cookies');
     }
     total += workingTotal; //tracks the total cookies sold
@@ -45,12 +45,12 @@ Stores.prototype.cookiesPerDay = function(hours) {
 
   //Store name
   var h2El = document.createElement('h2');
-  h2El.textContent = location.name;
+  h2El.textContent = this.name;
   //Displays an unordered list of the array elements
   var ulEl = document.createElement('ul');
-  for (var j = 0; j < location.cookiesArray.length; j++) {
+  for (var j = 0; j < arr.length; j++) {
     var liEl = document.createElement('li');
-    liEl.textContent = location.cookiesArray[j];
+    liEl.textContent = arr[j];
     ulEl.appendChild(liEl);
   }
   var sales = document.getElementById('locations');
