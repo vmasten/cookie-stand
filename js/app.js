@@ -59,60 +59,10 @@ Stores.prototype.cookiesPerDay = function(hours) {
 };
 
 var pike = new Stores('1st and Pike', 23, 65, 6.3);
-
-
-// //Store objects
-// var firstAndPike = {
-//   name: '1st and Pike',
-//   minCustomers: 23,
-//   maxCustomers: 65,
-//   cookieSalesAverage: 6.3,
-//   cookiesArray: [],
-//   hourlyCustomers: function() {
-//     var min = Math.ceil(this.minCustomers);
-//     var max = Math.floor(this.maxCustomers);
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-//   }
-// };
-
-// var seaTacAirport = {
-//   name: 'SeaTac Airport',
-//   minCustomers: 3,
-//   maxCustomers: 24,
-//   cookieSalesAverage: 1.2,
-//   cookiesArray: [],
-//   hourlyCustomers: function() {
-//     var min = Math.ceil(this.minCustomers);
-//     var max = Math.floor(this.maxCustomers);
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-//   }
-// };
-
-// var seattleCenter = {
-//   name: 'Seattle Center',
-//   minCustomers: 11,
-//   maxCustomers: 38,
-//   cookieSalesAverage: 3.7,
-//   cookiesArray: [],
-//   hourlyCustomers: function() {
-//     var min = Math.ceil(this.minCustomers);
-//     var max = Math.floor(this.maxCustomers);
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-//   }
-// };
-
-// var capitolHill = {
-//   name: 'Capitol Hill',
-//   minCustomers: 20,
-//   maxCustomers: 38,
-//   cookieSalesAverage: 2.3,
-//   cookiesArray: [],
-//   hourlyCustomers: function() {
-//     var min = Math.ceil(this.minCustomers);
-//     var max = Math.floor(this.maxCustomers);
-//     return Math.floor(Math.random() * (max - min + 1)) + min;
-//   }
-// };
+var seaTac = new Stores('SeaTac Airport', 3, 24, 1.2);
+var seattleCenter = new Stores('Seattle Center', 11, 38, 3.7);
+var capHill = new Stores('Capitol Hill', 20, 38, 2.3);
+var alki = new Stores('Alki', 2, 16, 4.6);
 
 // var alki = {
 //   name: 'Alki',
@@ -130,4 +80,9 @@ var pike = new Stores('1st and Pike', 23, 65, 6.3);
 /* I wasn't sure if some stores may have variable hours in the future, which is why I pass in
 hours to the function; additional work will be needed if stores have variable opening times */
 pike.cookiesPerDay(15);
+seaTac.cookiesPerDay(15);
+seattleCenter.cookiesPerDay(15);
+capHill.cookiesPerDay(15);
+alki.cookiesPerDay(15);
+
 
