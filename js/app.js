@@ -1,6 +1,7 @@
 'use strict';
 
 var firstAndPike = {
+  name: '1st and Pike',
   minCustomers: 23,
   maxCustomers: 65,
   cookieSalesAverage: 6.3,
@@ -9,7 +10,30 @@ var firstAndPike = {
     var max = Math.floor(this.maxCustomers);
     return Math.floor(Math.random() * (max - min + 1)) + min;
   }
+};
 
+var seaTacAirport = {
+  name: 'SeaTac Airport',
+  minCustomers: 3,
+  maxCustomers: 24,
+  cookieSalesAverage: 1.2,
+  hourlyCustomers: function() {
+    var min = Math.ceil(this.minCustomers);
+    var max = Math.floor(this.maxCustomers);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
+};
+
+var seattleCenter = {
+  name: 'Seattle Center',
+  minCustomers: 11,
+  maxCustomers: 38,
+  cookieSalesAverage: 3.7,
+  hourlyCustomers: function() {
+    var min = Math.ceil(this.minCustomers);
+    var max = Math.floor(this.maxCustomers);
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 };
 
 var cookiesPerHour = function(location) {
@@ -17,20 +41,37 @@ var cookiesPerHour = function(location) {
 };
 
 var cookiesPerDay = function(hours, location) {
-  var currentHour = 6;
-  var arr = [];
+  var workingTotal = 0, total = 0, currentHour = 6, arr = [];
   for (var i = 0; i < hours; i++) {
     if (currentHour < 12) {
-      arr.push(currentHour + ' am: ' + cookiesPerHour(location) + ' cookies');
+      workingTotal = cookiesPerHour(location);
+      arr.push(currentHour + ' am: ' + workingTotal + ' cookies');
     }
     else if (currentHour === 12) {
-      arr.push(currentHour + ' pm: ' + cookiesPerHour(location) + ' cookies');
+      workingTotal = cookiesPerHour(location);
+      arr.push(currentHour + ' pm: ' + workingTotal + ' cookies');
     } else {
-      arr.push((currentHour - 12) + ' pm: ' + cookiesPerHour(location) + ' cookies');
+      workingTotal = cookiesPerHour(location);
+      arr.push((currentHour - 12) + ' pm: ' + workingTotal + ' cookies');
     }
+    total += workingTotal;
     currentHour++;
   }
-  return arr;
+  arr.push('Total: ' + total + 'cookies');
+
+  var h2El = document.createElement('h2');
+  h2El.textContent = location.name;
+  var ulEl = document.createElement('ul');
+  for (var j = 0; j < arr.length; j++) {
+    var liEl = document.createElement('li');
+    liEl.textContent = arr[j];
+    ulEl.appendChild(liEl);
+  }
+  var test = document.getElementById('locations');
+  test.appendChild(h2El);
+  test.appendChild(ulEl);
 };
 
-console.log(cookiesPerDay(15, firstAndPike));
+cookiesPerDay(15, firstAndPike);
+cookiesPerDay(15, seaTacAirport);
+cookiesPerDay(15, seattleCenter);
