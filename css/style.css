@@ -2,6 +2,10 @@ body {
   background-color: #2c2c2c;
 }
 
+#sales {
+  background-color: white;
+}
+
 #locations {
   line-height: 1.5em;
   font-family: Arial, sans-serif;
