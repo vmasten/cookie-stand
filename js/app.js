@@ -1,96 +1,47 @@
 'use strict';
 
-//Store objects
-var firstAndPike = {
-  name: '1st and Pike',
-  minCustomers: 23,
-  maxCustomers: 65,
-  cookieSalesAverage: 6.3,
-  cookiesArray: [],
-  hourlyCustomers: function() {
-    var min = Math.ceil(this.minCustomers);
-    var max = Math.floor(this.maxCustomers);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
+
+function Stores(name, minCustomers, maxCustomers, salesAvg) {
+  this.name = name;
+  this.minCustomers = minCustomers;
+  this.maxCustomers = maxCustomers;
+  this.salesAvg = salesAvg;
+}
+
+Stores.prototype.hourlyCustomers = function() {
+  var min = Math.ceil(this.minCustomers);
+  var max = Math.floor(this.maxCustomers);
+  return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-var seaTacAirport = {
-  name: 'SeaTac Airport',
-  minCustomers: 3,
-  maxCustomers: 24,
-  cookieSalesAverage: 1.2,
-  cookiesArray: [],
-  hourlyCustomers: function() {
-    var min = Math.ceil(this.minCustomers);
-    var max = Math.floor(this.maxCustomers);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-};
-
-var seattleCenter = {
-  name: 'Seattle Center',
-  minCustomers: 11,
-  maxCustomers: 38,
-  cookieSalesAverage: 3.7,
-  cookiesArray: [],
-  hourlyCustomers: function() {
-    var min = Math.ceil(this.minCustomers);
-    var max = Math.floor(this.maxCustomers);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-};
-
-var capitolHill = {
-  name: 'Capitol Hill',
-  minCustomers: 20,
-  maxCustomers: 38,
-  cookieSalesAverage: 2.3,
-  cookiesArray: [],
-  hourlyCustomers: function() {
-    var min = Math.ceil(this.minCustomers);
-    var max = Math.floor(this.maxCustomers);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-};
-
-var alki = {
-  name: 'Alki',
-  minCustomers: 2,
-  maxCustomers: 16,
-  cookieSalesAverage: 4.6,
-  cookiesArray: [],
-  hourlyCustomers: function() {
-    var min = Math.ceil(this.minCustomers);
-    var max = Math.floor(this.maxCustomers);
-    return Math.floor(Math.random() * (max - min + 1)) + min;
-  }
-};
 
 //A simple function to get the cookies per hour; probably should be moved into each object
-var cookiesPerHour = function(location) {
-  return Math.round(location.hourlyCustomers() * location.cookieSalesAverage);
+Stores.prototype.cookiesPerHour = function() {
+  return Math.round(this.hourlyCustomers() * this.salesAvg);
 };
+
 
 /* Uses cookiesPerHour to build an array of sales by hour (including a total for the day)
 and inserts the results into an unordered list in sales.html */
-var cookiesPerDay = function(hours, location) {
-  var workingTotal = 0, total = 0, currentHour = 6;
+
+Stores.prototype.cookiesPerDay = function(hours) {
+  var arr = [], workingTotal = 0, total = 0, currentHour = 6;
   for (var i = 0; i < hours; i++) {
     if (currentHour < 12) { //morning
-      workingTotal = cookiesPerHour(location);
-      location.cookiesArray.push(currentHour + ' am: ' + workingTotal + ' cookies');
+      workingTotal = location.cookiesPerHour();
+      arr.push(currentHour + ' am: ' + workingTotal + ' cookies');
     }
     else if (currentHour === 12) { //noon
-      workingTotal = cookiesPerHour(location);
-      location.cookiesArray.push(currentHour + ' pm: ' + workingTotal + ' cookies');
+      workingTotal = location.cookiesPerHour();
+      arr.push(currentHour + ' pm: ' + workingTotal + ' cookies');
     } else { //evening
-      workingTotal = cookiesPerHour(location);
-      location.cookiesArray.push((currentHour - 12) + ' pm: ' + workingTotal + ' cookies');
+      workingTotal = location.cookiesPerHour();
+      arr.push((currentHour - 12) + ' pm: ' + workingTotal + ' cookies');
     }
     total += workingTotal; //tracks the total cookies sold
     currentHour++;
   }
-  location.cookiesArray.push('Total: ' + total + 'cookies');
+  arr.push('Total: ' + total + 'cookies');
 
   //Store name
   var h2El = document.createElement('h2');
@@ -107,10 +58,76 @@ var cookiesPerDay = function(hours, location) {
   sales.appendChild(ulEl);
 };
 
+var pike = new Stores('1st and Pike', 23, 65, 6.3);
+
+
+// //Store objects
+// var firstAndPike = {
+//   name: '1st and Pike',
+//   minCustomers: 23,
+//   maxCustomers: 65,
+//   cookieSalesAverage: 6.3,
+//   cookiesArray: [],
+//   hourlyCustomers: function() {
+//     var min = Math.ceil(this.minCustomers);
+//     var max = Math.floor(this.maxCustomers);
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+//   }
+// };
+
+// var seaTacAirport = {
+//   name: 'SeaTac Airport',
+//   minCustomers: 3,
+//   maxCustomers: 24,
+//   cookieSalesAverage: 1.2,
+//   cookiesArray: [],
+//   hourlyCustomers: function() {
+//     var min = Math.ceil(this.minCustomers);
+//     var max = Math.floor(this.maxCustomers);
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+//   }
+// };
+
+// var seattleCenter = {
+//   name: 'Seattle Center',
+//   minCustomers: 11,
+//   maxCustomers: 38,
+//   cookieSalesAverage: 3.7,
+//   cookiesArray: [],
+//   hourlyCustomers: function() {
+//     var min = Math.ceil(this.minCustomers);
+//     var max = Math.floor(this.maxCustomers);
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+//   }
+// };
+
+// var capitolHill = {
+//   name: 'Capitol Hill',
+//   minCustomers: 20,
+//   maxCustomers: 38,
+//   cookieSalesAverage: 2.3,
+//   cookiesArray: [],
+//   hourlyCustomers: function() {
+//     var min = Math.ceil(this.minCustomers);
+//     var max = Math.floor(this.maxCustomers);
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+//   }
+// };
+
+// var alki = {
+//   name: 'Alki',
+//   minCustomers: 2,
+//   maxCustomers: 16,
+//   cookieSalesAverage: 4.6,
+//   cookiesArray: [],
+//   hourlyCustomers: function() {
+//     var min = Math.ceil(this.minCustomers);
+//     var max = Math.floor(this.maxCustomers);
+//     return Math.floor(Math.random() * (max - min + 1)) + min;
+//   }
+// };
+
 /* I wasn't sure if some stores may have variable hours in the future, which is why I pass in
 hours to the function; additional work will be needed if stores have variable opening times */
-cookiesPerDay(15, firstAndPike);
-cookiesPerDay(15, seaTacAirport);
-cookiesPerDay(15, seattleCenter);
-cookiesPerDay(15, capitolHill);
-cookiesPerDay(15, alki);
+pike.cookiesPerDay(15);
+
