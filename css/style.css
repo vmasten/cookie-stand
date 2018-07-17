@@ -1,3 +1,8 @@
 body {
   line-height: 1.5em;
 }
+
+#logo {
+  width: "300px";
+  height: "200px";
+}
