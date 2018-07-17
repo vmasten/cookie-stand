@@ -71,8 +71,8 @@ var cookiesPerHour = function(location) {
   return Math.round(location.hourlyCustomers() * location.cookieSalesAverage);
 };
 
-/*Uses cookiesPerHour to build an array of sales by hour (including a total for the day)
-and inserts the results into an unordered list in sales.html*/
+/* Uses cookiesPerHour to build an array of sales by hour (including a total for the day)
+and inserts the results into an unordered list in sales.html */
 var cookiesPerDay = function(hours, location) {
   var workingTotal = 0, total = 0, currentHour = 6;
   for (var i = 0; i < hours; i++) {
@@ -107,8 +107,8 @@ var cookiesPerDay = function(hours, location) {
   sales.appendChild(ulEl);
 };
 
-/*I wasn't sure if some stores may have variable hours in the future, which is why I pass in
-hours to the function; additional work will be needed if stores have variable opening times*/
+/* I wasn't sure if some stores may have variable hours in the future, which is why I pass in
+hours to the function; additional work will be needed if stores have variable opening times */
 cookiesPerDay(15, firstAndPike);
 cookiesPerDay(15, seaTacAirport);
 cookiesPerDay(15, seattleCenter);
