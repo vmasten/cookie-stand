@@ -33,7 +33,6 @@ Store.prototype.hourlySales = function() {
   }
 };
 
-
 Store.prototype.cookiesPerDay = function() {
   this.hourlySales();
 
@@ -43,7 +42,6 @@ Store.prototype.cookiesPerDay = function() {
   }
 };
 
-//Uses the array built by cookiesPerDay to write the data to a table
 Store.prototype.render = function() {
   this.cookiesPerDay();
   var trEl = document.createElement('tr');
@@ -62,6 +60,18 @@ Store.prototype.render = function() {
   trEl.appendChild(tdTotalEl);
   tblEl.appendChild(trEl);
 
+};
+
+var totalsByHour = function(storeArray) {
+  var arr = [], runTotal = 0;
+  for (var hour in hours) {
+    for (var store in storeArray) {
+      runTotal = runTotal + storeArray[store].cookiesPerHour[hour];
+    }
+    arr.push(runTotal);
+    runTotal = 0;
+  }
+  return arr;
 };
 
 //Sets up the first row of the table. Name was not intended to be cute
@@ -86,10 +96,33 @@ var tableSet = function() {
 
   trEl.appendChild(total);
   tblEl.appendChild(trEl);
+  
+
+  //   var tfEl = document.createElement('tfoot');
+  //   tfEl.textContent = 'Totals';
+  //   for (var hour in hours) {
+  //     for (var hour in hours) {
+  //     var totalByHourEl = document.createElement('td')
+  //     totalByHourEl.textContent = 
+  //   }
+  // }
+  //tblEl.appendChild(tfEl);
 
   document.getElementById('locations').appendChild(h2El);
   document.getElementById('locations').appendChild(tblEl);
 
+};
+
+var footer = function() {
+  var arr = totalsByHour(allStores);
+  var tfoot = document.createElement('tfoot');
+  tfoot.textContent = 'Totals';
+  for (var index in arr) {
+    var tdfoot = document.createElement('td');
+    tdfoot.textContent = arr[index];
+    tfoot.appendChild(tdfoot);
+  }
+  tblEl.appendChild(tfoot);
 };
 
 // //Object instantiation
@@ -105,4 +138,5 @@ tableSet();
 for (var store of allStores) {
   store.render();
 }
-/* I wasn't sure if some stores may have variable hours in the future, which is why I (still) pass in hours to the function; additional work will be needed if stores have variable opening times */
+
+footer();

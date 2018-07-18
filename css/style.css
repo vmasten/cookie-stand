@@ -82,11 +82,12 @@ table {
   width: 100%;
 }
 
-th {
+th, tfoot {
   border: 30px;
   padding-left: 10px;
   white-space: nowrap;
   font-weight: bold;
+  text-align: center;
 }
 
 td {
