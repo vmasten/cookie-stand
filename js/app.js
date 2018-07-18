@@ -1,7 +1,7 @@
 'use strict';
 
 //Used later to build the table
-var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm'], openHours = 14;
+var hours = ['6:00am', '7:00am', '8:00am', '9:00am', '10:00am', '11:00am', '12:00pm', '1:00pm', '2:00pm', '3:00pm', '4:00pm', '5:00pm', '6:00pm', '7:00pm'], openHours = 14, tblEl;
 
 function Stores(name, minCustomers, maxCustomers, salesAvg) {
   this.name = name;
@@ -56,12 +56,16 @@ Stores.prototype.render = function(hours) {
 //Sets up the first row of the table. Name was not intended to be cute
 //but couldn't bring myself to change it
 var tableSet = function() {
+  tblEl = document.createElement('table');
   var h2El = document.createElement('h2');
   h2El.textContent = 'Cookies Needed By Location Each Day';
+  document.getElementById('locations').appendChild(h2El);
+
   var trEl = document.createElement('tr');
-  var blank = document.createElement('th');
-  blank.textContent = '';
-  trEl.appendChild(blank);
+  var blankEl = document.createElement('th');
+  blankEl.textContent = '';
+  trEl.appendChild(blankEl);
+
   for (var idx in hours) {
     var thEl = document.createElement('th');
     thEl.textContent = hours[idx];
@@ -72,8 +76,8 @@ var tableSet = function() {
   trEl.appendChild(total);
 
   var sales = document.getElementById('locations');
-  sales.appendChild(h2El);
   sales.appendChild(trEl);
+  sales.appendChild(tblEl);
 
 };
 
@@ -93,3 +97,12 @@ capHill.render(openHours);
 alki.render(openHours);
 
 /* I wasn't sure if some stores may have variable hours in the future, which is why I (still) pass in hours to the function; additional work will be needed if stores have variable opening times */
+
+//Some things to refactor:
+
+//for var store of allStores
+//store.render()
+
+//var tblEl = document.createElement('table');
+//document.getElementById('main-content').appendChild(tblEl);
+
