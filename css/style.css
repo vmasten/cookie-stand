@@ -68,3 +68,13 @@ body {
   text-align: center;
   font-size: 20px;
 }
+
+table {
+  table-layout: fixed;
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 20px;
+}
