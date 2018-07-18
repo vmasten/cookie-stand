@@ -72,9 +72,20 @@ body {
 table {
   table-layout: fixed;
   width: 100%;
-  border-collapse: collapse;
+  
+  
 }
 
-th, td {
-  padding: 20px;
+th {
+  border: 30px;
+  white-space: nowrap;
+}
+
+td {
+  padding: 0px 20px;
+  text-align: center;
+}
+
+tr:nth-child(even) {
+  background-color: whitesmoke;
 }

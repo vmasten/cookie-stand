@@ -30,29 +30,32 @@ Stores.prototype.cookiesPerDay = function(hours) {
   for (var i = 0; i < hours; i++) {
     if (currentHour < 12) { //morning
       workingTotal = this.cookiesPerHour();
-      arr.push(currentHour + ' am: ' + workingTotal + ' cookies');
+      arr.push(workingTotal);
     }
     else if (currentHour === 12) { //noon
       workingTotal = this.cookiesPerHour();
-      arr.push(currentHour + ' pm: ' + workingTotal + ' cookies');
+      arr.push(workingTotal);
     } else { //evening
       workingTotal = this.cookiesPerHour();
-      arr.push((currentHour - 12) + ' pm: ' + workingTotal + ' cookies');
+      arr.push(workingTotal);
     }
     total += workingTotal; //tracks the total cookies sold
     currentHour++;
   }
-  arr.push('Total: ' + total + 'cookies');
+  arr.push(total);
   return arr;
 };
 
 Stores.prototype.render = function(hours) {
   var arr = this.cookiesPerDay(hours);
   var trEl = document.createElement('tr');
+  var title = document.createElement('th');
+  title.textContent = this.name;
+  trEl.appendChild(title);
   for (var idx in arr) {
-    var thEl = document.createElement('th');
-    thEl.textContent = arr[idx];
-    trEl.appendChild(thEl);
+    var tdEl = document.createElement('td');
+    tdEl.textContent = arr[idx];
+    trEl.appendChild(tdEl);
   }
   var sales = document.getElementById('locations');
   sales.appendChild(trEl);
@@ -64,16 +67,18 @@ var tableSet = function() {
   h2El.textContent = 'Cookies Needed By Location Each Day';
   var trEl = document.createElement('tr');
   var blank = document.createElement('th');
-  blank.textContent = '            ';
+  blank.textContent = '';
   trEl.appendChild(blank);
   for (var idx in hours) {
     var thEl = document.createElement('th');
     thEl.textContent = hours[idx];
     trEl.appendChild(thEl);
   }
+  var total = document.createElement('th');
+  total.textContent = 'Daily Location Total';
+  trEl.appendChild(total);
+  
   var sales = document.getElementById('locations');
-  sales.appendChild(blank);
-  sales.appendChild(h2El);
   sales.appendChild(trEl);
 
 };
@@ -83,8 +88,13 @@ var seaTac = new Stores('SeaTac Airport', 3, 24, 1.2);
 var seattleCenter = new Stores('Seattle Center', 11, 38, 3.7);
 var capHill = new Stores('Capitol Hill', 20, 38, 2.3);
 var alki = new Stores('Alki', 2, 16, 4.6);
+
 tableSet();
 pike.render(14);
+seaTac.render(14);
+seattleCenter.render(14);
+capHill.render(14);
+alki.render(14);
 
 /* I wasn't sure if some stores may have variable hours in the future, which is why I pass in
 hours to the function; additional work will be needed if stores have variable opening times */
