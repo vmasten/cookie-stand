@@ -6,7 +6,17 @@
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
 <body id="sales">
-  <section id="locations"></section>
+  <section id="locations">
+  <h2>Add a store:</h2>
+  <form id="main-form">
+      <input name="name" type="text" placeholder="pike">
+      <input name="minCustomers" type="text" placeholder="1">
+      <input name="maxCustomers" type="text" placeholder="99">
+      <input name="salesAvg" type="text" placeholder="1.1">
+
+      <button type="submit" hidden>submit</button>
+  </form>
+</section>
   <script src="js/app.js"></script>
 </body>
 </html>

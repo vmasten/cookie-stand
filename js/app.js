@@ -20,7 +20,7 @@ function Store(name, minCustomers, maxCustomers, salesAvg) {
 Store.prototype.hourlyCustomers = function() {
   var min = Math.ceil(this.minCustomers);
   var max = Math.floor(this.maxCustomers);
-  for (var hour of hours) {
+  for (var hour in hours) {
     this.customersPerHour.push(Math.floor(Math.random() * (max - min + 1)) + min);
   }
 };
@@ -43,22 +43,28 @@ Store.prototype.cookiesPerDay = function() {
 };
 
 Store.prototype.render = function() {
-  this.cookiesPerDay();
-  var trEl = document.createElement('tr');
-  var title = document.createElement('th');
-  title.textContent = this.name;
-  trEl.appendChild(title);
+  if (document.getElementById('tfoot') === null)
+  {
+    this.cookiesPerDay();
+    var trEl = document.createElement('tr');
+    var title = document.createElement('th');
+    title.textContent = this.name;
+    trEl.appendChild(title);
 
-  for (var hour in hours) {
-    var tdEl = document.createElement('td');
-    tdEl.textContent = this.cookiesPerHour[hour];
-    trEl.appendChild(tdEl);
+    for (var hour in hours) {
+      var tdEl = document.createElement('td');
+      tdEl.textContent = this.cookiesPerHour[hour];
+      trEl.appendChild(tdEl);
+    }
+
+    var tdTotalEl = document.createElement('td');
+    tdTotalEl.textContent = this.dailyTotal;
+    trEl.appendChild(tdTotalEl);
+    tblEl.appendChild(trEl);
   }
-
-  var tdTotalEl = document.createElement('td');
-  tdTotalEl.textContent = this.dailyTotal;
-  trEl.appendChild(tdTotalEl);
-  tblEl.appendChild(trEl);
+  else
+    var removeEl = document.getElementById('locations');
+    tblEl.removeChild(removeEl);
 
 };
 
@@ -96,17 +102,6 @@ var tableSet = function() {
 
   trEl.appendChild(total);
   tblEl.appendChild(trEl);
-  
-
-  //   var tfEl = document.createElement('tfoot');
-  //   tfEl.textContent = 'Totals';
-  //   for (var hour in hours) {
-  //     for (var hour in hours) {
-  //     var totalByHourEl = document.createElement('td')
-  //     totalByHourEl.textContent = 
-  //   }
-  // }
-  //tblEl.appendChild(tfEl);
 
   document.getElementById('locations').appendChild(h2El);
   document.getElementById('locations').appendChild(tblEl);
@@ -124,6 +119,19 @@ var footer = function() {
   }
   tblEl.appendChild(tfoot);
 };
+
+var formEl = document.getElementById('main-form');
+formEl.addEventListener('submit', function(event) {
+  event.preventDefault();
+
+  var name = event.target.name.value;
+  var minCust = Number(event.target.minCustomers.value);
+  var maxCust = Number(event.target.maxCustomers.value);
+  var salesAvg = Number(event.target.salesAvg.value);
+
+  new Store(name, minCust, maxCust, salesAvg).render()
+  footer();
+})
 
 // //Object instantiation
 new Store('1st and Pike', 23, 65, 6.3);
