@@ -1,5 +1,12 @@
+@import url("https://fonts.googleapis.com/css?family=Lato"); /* so it can be used on both pages */
+
 body {
   background-color: #2c2c2c;
+}
+
+h2 {
+  font-size: 20px;
+  padding: 0px 0px 20px 20px;
 }
 
 #sales {
@@ -21,15 +28,16 @@ body {
   float:left;
 }
 .navbar ul {
-  display: inline-block;
+  /* display: inline-block; */
   line-height: 80px;
+  text-align: right;
 }
 .navbar li {
   list-style-type: none;
   display: inline;
   font-family: "Lato";
   font-size: 24px;
-  padding: 50px;
+  /* padding: 50px; */
   color: white;
 }
 
@@ -78,7 +86,7 @@ body {
 }
 
 table {
-  table-layout: fixed;
+  table-layout: relative;
   width: 100%;
 }
 
@@ -114,4 +122,8 @@ tr:nth-child(even) {
 .formTitle {
   background-color: black;
   color: white;
+}
+
+.nav_img {
+  padding-right: 20px;
 }

@@ -156,3 +156,4 @@ new Store('Alki', 2, 16, 4.6);
 tableSet();
 renderStores();
 footer();
+
