@@ -71,7 +71,7 @@ var totalsByHour = function(storeArray) {
   var arr = [], runTotal = 0;
   for (var hour in hours) {
     for (var store in storeArray) {
-      runTotal = runTotal + storeArray[store].cookiesPerHour[hour];
+      runTotal += storeArray[store].cookiesPerHour[hour];
     }
     arr.push(runTotal);
     runTotal = 0;
@@ -139,6 +139,12 @@ formEl.addEventListener('submit', function(event) {
   footer();
 });
 
+var renderStores = function() {
+  for (var store of allStores) {
+    store.render();
+  }
+};
+
 //Initial object instantiation
 new Store('1st and Pike', 23, 65, 6.3);
 new Store('SeaTac Airport', 3, 24, 1.2);
@@ -148,9 +154,5 @@ new Store('Alki', 2, 16, 4.6);
 
 //Table building
 tableSet();
-
-for (var store of allStores) {
-  store.render();
-}
-
+renderStores();
 footer();

@@ -72,7 +72,7 @@ body {
   padding: 20px;
 }
 
-#locations h2 {
+#locations legend {
   font-size: 24px;
   padding: 20px;
 }
@@ -102,4 +102,16 @@ tr:nth-child(even) {
 #main-form {
   padding: 20px;
   display: inline;
+}
+
+.storeAdd {
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid black;
+  width: 65%;
+}
+
+.formTitle {
+  background-color: black;
+  color: white;
 }
