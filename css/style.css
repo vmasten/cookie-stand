@@ -98,3 +98,8 @@ td {
 tr:nth-child(even) {
   background-color: whitesmoke;
 }
+
+#main-form {
+  padding: 20px;
+  display: inline;
+}

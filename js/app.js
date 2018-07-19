@@ -20,12 +20,12 @@ function Store(name, minCustomers, maxCustomers, salesAvg) {
 Store.prototype.hourlyCustomers = function() {
   var min = Math.ceil(this.minCustomers);
   var max = Math.floor(this.maxCustomers);
-  for (var hour in hours) {
+  for (var i = 0; i < hours.length; i++) {
     this.customersPerHour.push(Math.floor(Math.random() * (max - min + 1)) + min);
   }
 };
 
-
+//Multiplies customers per hour by average sales to get an hourly sales figure
 Store.prototype.hourlySales = function() {
   this.hourlyCustomers();
   for (var hour in hours) {
@@ -33,6 +33,8 @@ Store.prototype.hourlySales = function() {
   }
 };
 
+//Uses hourlySales to track cookies sold for the day
+//pushes hourly sales to an array and tracks total sales
 Store.prototype.cookiesPerDay = function() {
   this.hourlySales();
 
@@ -42,32 +44,29 @@ Store.prototype.cookiesPerDay = function() {
   }
 };
 
+//Renders tabular data for each store to <table> in sales.html
 Store.prototype.render = function() {
-  if (document.getElementById('tfoot') === null)
-  {
-    this.cookiesPerDay();
-    var trEl = document.createElement('tr');
-    var title = document.createElement('th');
-    title.textContent = this.name;
-    trEl.appendChild(title);
+  this.cookiesPerDay();
+  var trEl = document.createElement('tr');
+  var title = document.createElement('th');
+  title.textContent = this.name;
+  trEl.appendChild(title);
 
-    for (var hour in hours) {
-      var tdEl = document.createElement('td');
-      tdEl.textContent = this.cookiesPerHour[hour];
-      trEl.appendChild(tdEl);
-    }
-
-    var tdTotalEl = document.createElement('td');
-    tdTotalEl.textContent = this.dailyTotal;
-    trEl.appendChild(tdTotalEl);
-    tblEl.appendChild(trEl);
+  for (var hour in hours) {
+    var tdEl = document.createElement('td');
+    tdEl.textContent = this.cookiesPerHour[hour];
+    trEl.appendChild(tdEl);
   }
-  else
-    var removeEl = document.getElementById('locations');
-    tblEl.removeChild(removeEl);
+
+  var tdTotalEl = document.createElement('td');
+  tdTotalEl.textContent = this.dailyTotal;
+  trEl.appendChild(tdTotalEl);
+  tblEl.appendChild(trEl);
 
 };
 
+//standalone function used by footer() to sum all cookie
+//sales per hour
 var totalsByHour = function(storeArray) {
   var arr = [], runTotal = 0;
   for (var hour in hours) {
@@ -84,6 +83,7 @@ var totalsByHour = function(storeArray) {
 //but couldn't bring myself to change it
 var tableSet = function() {
   tblEl = document.createElement('table');
+  tblEl.setAttribute('id', 'table');
   var h2El = document.createElement('h2');
   h2El.textContent = 'Cookies Needed By Location Each Day';
 
@@ -108,7 +108,12 @@ var tableSet = function() {
 
 };
 
+//Builds the last row of the table with hourly sales totals
 var footer = function() {
+  //if a footer already exists, kill it with fire. Thanks, Dmitry!
+  if (document.getElementsByTagName('tfoot') !== undefined) {
+    document.getElementById('table').deleteTFoot();
+  }
   var arr = totalsByHour(allStores);
   var tfoot = document.createElement('tfoot');
   tfoot.textContent = 'Totals';
@@ -120,20 +125,21 @@ var footer = function() {
   tblEl.appendChild(tfoot);
 };
 
+//Creates a form for adding new stores
 var formEl = document.getElementById('main-form');
 formEl.addEventListener('submit', function(event) {
   event.preventDefault();
 
   var name = event.target.name.value;
-  var minCust = Number(event.target.minCustomers.value);
-  var maxCust = Number(event.target.maxCustomers.value);
-  var salesAvg = Number(event.target.salesAvg.value);
+  var minCust = event.target.minCustomers.value;
+  var maxCust = event.target.maxCustomers.value;
+  var salesAvg = event.target.salesAvg.value;
 
-  new Store(name, minCust, maxCust, salesAvg).render()
+  new Store(name, minCust, maxCust, salesAvg).render();
   footer();
-})
+});
 
-// //Object instantiation
+//Initial object instantiation
 new Store('1st and Pike', 23, 65, 6.3);
 new Store('SeaTac Airport', 3, 24, 1.2);
 new Store('Seattle Center', 11, 38, 3.7);
