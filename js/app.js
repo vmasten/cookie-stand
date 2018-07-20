@@ -122,6 +122,9 @@ var footer = function() {
     tdfoot.textContent = arr[index];
     tfoot.appendChild(tdfoot);
   }
+  var blankEl = document.createElement('th');
+  blankEl.textContent = '';
+  tfoot.appendChild(blankEl);
   tblEl.appendChild(tfoot);
 };
 
@@ -156,4 +159,3 @@ new Store('Alki', 2, 16, 4.6);
 tableSet();
 renderStores();
 footer();
-
