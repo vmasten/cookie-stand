@@ -1,13 +1,35 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Sales</title>
-  <!-- Including a reset.css messed up the bullets and indentation, and including it wasn't part
-  of today's spec, so I'm dodging the issue for now -->
+  <title>Sales Data</title>
+  <link rel="stylesheet" type="text/css" href="css/reset.css">
   <link rel="stylesheet" type="text/css" href="css/style.css">
 </head>
-<body>
-  <section id="locations"></section>
+<body id="sales">
+    <div class="navbar">
+
+        <img class="nav_img" src="img/salmon_logo.png" alt="A salmon"> <!--all images poorly edited and resized in Pixelmator-->
+      <ul>
+        <li><a href="index.html#home">Home</a></li>
+        <li><a href="about.html">About</a></li>
+        <li><a href="visit.html">Visit</a></li>
+        <li><a href="index.html#merchandise">Merchandise</a></li>
+        <li><a href="sales.html">Login</a></li>
+      </ul>
+  </div>
+
+  <section id="locations">
+    <form id="main-form">
+      <fieldset class="storeAdd">
+          <legend class="formTitle">Add a store:</legend>
+          <input name="name" type="text" placeholder="Store Name">
+          <input name="minCustomers" type="number" placeholder="Minimum Customers">
+          <input name="maxCustomers" type="number" placeholder="Maximum Customers">
+          <input name="salesAvg" type="number" placeholder="Average Sales"step="0.1">
+          <button type="submit">submit</button>
+      </fieldset>
+      </form>
+    </section>
   <script src="js/app.js"></script>
 </body>
 </html>
