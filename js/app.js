@@ -124,9 +124,9 @@ var footer = function() {
     tdfoot.textContent = arr[index];
     tfoot.appendChild(tdfoot);
   }
-  var blankEl = document.createElement('th');
-  blankEl.textContent = '';
-  tfoot.appendChild(blankEl);
+  // var blankEl = document.createElement('th');
+  // blankEl.textContent = '';
+  // tfoot.appendChild(blankEl);
   tblEl.appendChild(tfoot);
 };
 
