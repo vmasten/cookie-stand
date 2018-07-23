@@ -10,23 +10,6 @@ h2 {
   padding: 0px 0px 20px 20px;
 }
 
-#sales {
-  background-color: white;
-}
-
-#sales::after { /* why yes, I did copy Scott's idea, because that image is TERRIBLE */
-  content: "";
-  background: url("/img/family.jpg");
-  background-size: 100%;
-  opacity: 0.1;
-  top: 0;
-  left: 0;
-  bottom: 0;
-  right: 0;
-  background-repeat: no-repeat;
-  position: absolute;
-  z-index: -1;  
-}
 
 #locations {
   line-height: 1.5em;
@@ -44,7 +27,6 @@ h2 {
   float:left;
 }
 .navbar ul {
-  /* display: inline-block; */
   line-height: 80px;
   text-align: right;
 }
@@ -53,7 +35,6 @@ h2 {
   display: inline;
   font-family: "Lato";
   font-size: 24px;
-  /* padding: 50px; */
   color: white;
 }
 
@@ -86,10 +67,6 @@ h2 {
 }
 
 .visit {
-  /* column-count: 3;
-  column-width: 33%;
-  column-rule: 1px solid;
-  column-rule-color: rgba(255, 255, 255, 0.2); gonna have to save columns for the weekend*/
   font-family: Times, serif;
   font-size: 18px;
   line-height: 1.5em;
@@ -128,6 +105,24 @@ h2 {
   text-align: center;
   font-size: 20px;
   padding: 0px 0px 20px 20px;
+}
+
+#sales {
+  background-color: white;
+}
+
+#sales::after { /* why yes, I did copy Scott's idea, because that image is TERRIBLE */
+  content: "";
+  background: url("/img/family.jpg");
+  background-size: 100%;
+  opacity: 0.1;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  background-repeat: no-repeat;
+  position: absolute;
+  z-index: -1;  
 }
 
 .stores {
@@ -174,12 +169,12 @@ tr:nth-child(even) {
 .storeAdd {
   padding: 20px;
   margin: 20px;
-  border: 1px solid black;
+  border: 1px solid #2c2c2c;
   width: 615px;
 }
 
 .formTitle {
-  background-color: black;
+  background-color: #2c2c2c;
   color: white;
 }
 
@@ -190,3 +185,4 @@ tr:nth-child(even) {
 input {
   margin-right: 5px;
 }
+
