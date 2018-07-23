@@ -68,14 +68,16 @@ Store.prototype.render = function() {
 //standalone function used by footer() to sum all cookie
 //sales per hour
 var totalsByHour = function(storeArray) {
-  var arr = [], runTotal = 0;
+  var arr = [], runTotal = 0, allTotals = 0;
   for (var hour in hours) {
     for (var store in storeArray) {
       runTotal += storeArray[store].cookiesPerHour[hour];
+      allTotals += storeArray[store].cookiesPerHour[hour];
     }
     arr.push(runTotal);
     runTotal = 0;
   }
+  arr.push(allTotals);
   return arr;
 };
 
